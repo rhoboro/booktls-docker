@@ -46,6 +46,8 @@ RUN curl -sSLO https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz \
  && rm -v openssl-$OPENSSL_VERSION.tar.gz \
  && cd "/root/openssl-$OPENSSL_VERSION/" \
  && ./config --prefix=/opt/openssl \
+        # https://zenn.dev/tatsuto/articles/openssl-source-build#-wl%2C-rpath%2C%24(librpath)
+        '-Wl,-rpath,$(LIBRPATH)' \
         shared \
         enable-ec_nistp_64_gcc_128 \
  && make depend \
